@@ -24,7 +24,7 @@ app.layout = dbc.Container([
 
      # Name 
     dbc.Row([
-        dbc.Col(html.H2("Leanna Chan (1181100934)", className="text-center")),
+        dbc.Col(html.H3("Leanna Chan (1181100934)", className="text-center")),
     ]),
 
      # Summary Paragraph under the title
