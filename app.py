@@ -30,7 +30,7 @@ app.layout = dbc.Container([
      # Summary Paragraph under the title
     dbc.Row([
         dbc.Col(html.Div([
-            html.P("This landing page visualizes data on Top Spotify songs from 2010 to 2019 through three interactive charts. The first is a scatter plot comparing song length to popularity, highlighting "Mark My Words" by Justin Bieber as the shortest (134 seconds, 63% popularity) and "TKO" by Justin Timberlake as the longest (424 seconds, 58% popularity), with a slider to filter by song length. The second is a line graph tracking artist popularity over the years, with a dropdown menu to filter by artist. The third is a bar chart showing average popularity by genre, featuring a hover function for details and a point slider to filter by year. Overall, the app offers an engaging way to explore music trends, allowing users to easily analyze relationships between song features, genres, and artists.")
+            html.P("This landing page visualizes data on Top Spotify songs from 2010 to 2019 through three interactive charts. The first is a scatter plot comparing song length to popularity, highlighting 'Mark My Words' by Justin Bieber as the shortest (134 seconds, 63% popularity) and 'TKO' by Justin Timberlake as the longest (424 seconds, 58% popularity), with a slider to filter by song length. The second is a line graph tracking artist popularity over the years, with a dropdown menu to filter by artist. The third is a bar chart showing average popularity by genre, featuring a hover function for details and a point slider to filter by year. Overall, the app offers an engaging way to explore music trends, allowing users to easily analyze relationships between song features, genres, and artists.")
         ]), width=12)
     ]),
 
@@ -212,22 +212,19 @@ def update_charts(year_range, hover_data):
         genre_trend = filtered_df[filtered_df['top_genre'] == genre_hovered].groupby('year').agg({'popularity': 'mean'}).reset_index()
 
         # Create a line chart showing the popularity trend for the hovered genre
-        trend_fig = px.line(genre_trend, 
-                            x='year', 
-                            y='popularity', 
-                            title=f"Popularity Trend for {genre_hovered} Over the Years",
-                            labels={'year': 'Year', 'popularity': 'Average Popularity'},
-                            markers=True)
-        
-        # Ensure the chart shows even if there's data for only one year
-        if len(genre_trend) == 1:
-            trend_fig.update_traces(mode='markers+lines')
+        hover_trend_fig = px.line(genre_trend,
+                                  x='year',
+                                  y='popularity',
+                                  title=f"Popularity Trend for {genre_hovered} (Hover Detail)",
+                                  labels={'year': 'Year', 'popularity': 'Average Popularity'})
     else:
-        # Default empty chart when no genre is hovered
-        trend_fig = go.Figure()
-        trend_fig.update_layout(title="Hover over a genre to see detailed trends.")
+        # Show a default empty chart or message
+        hover_trend_fig = go.Figure()
+        hover_trend_fig.add_annotation(text="Hover over a genre to see the trend",
+                                       showarrow=False,
+                                       font=dict(size=16))
 
-    return bar_fig, trend_fig
+    return bar_fig, hover_trend_fig
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run_server(debug=True)
