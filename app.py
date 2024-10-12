@@ -19,7 +19,19 @@ all_years = pd.DataFrame({'year': range(df['year'].min(), df['year'].max() + 1)}
 app.layout = dbc.Container([
     # Header for the app
     dbc.Row([
-        dbc.Col(html.H1("Spotify Data Visualizations", className="text-center")),
+        dbc.Col(html.H1("MCM7183 Project- Spotify Data Visualizations", className="text-center")),
+    ]),
+
+     # Name 
+    dbc.Row([
+        dbc.Col(html.H2("Leanna Chan (1181100934)", className="text-center")),
+    ]),
+
+     # Summary Paragraph under the title
+    dbc.Row([
+        dbc.Col(html.Div([
+            html.P("This landing page visualizes data on Top Spotify songs from 2010 to 2019 through three interactive charts. The first is a scatter plot comparing song length to popularity, highlighting "Mark My Words" by Justin Bieber as the shortest (134 seconds, 63% popularity) and "TKO" by Justin Timberlake as the longest (424 seconds, 58% popularity), with a slider to filter by song length. The second is a line graph tracking artist popularity over the years, with a dropdown menu to filter by artist. The third is a bar chart showing average popularity by genre, featuring a hover function for details and a point slider to filter by year. Overall, the app offers an engaging way to explore music trends, allowing users to easily analyze relationships between song features, genres, and artists.")
+        ]), width=12)
     ]),
 
     # Scatter plot: Song Length vs Popularity
