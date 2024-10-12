@@ -10,7 +10,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 # Load the dataset
-df = pd.read_csv('https://raw.githubusercontent.com/KhalidBatran/MCM-project-2/refs/heads/main/assets/top10s_spotify.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/leannachan12/MCM7183-Project/refs/heads/main/assets/top10s_spotify.csv')
 
 # Ensure there are no missing years in the dataset (fill missing years with 0 popularity for line chart)
 all_years = pd.DataFrame({'year': range(df['year'].min(), df['year'].max() + 1)})
